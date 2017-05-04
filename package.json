@@ -1,0 +1,9 @@
+{
+  "name": "demo-react-scoreboard",
+  "version": "1.0.0",
+  "description": "learning react with typescript",
+  "scripts": {
+    "build": "webpack"
+  },
+  "author": "Roland Kalmogo"
+}
