@@ -1,4 +1,4 @@
-#REACT DEMO WITH TYPESCRIPT
+# REACT DEMO WITH TYPESCRIPT
 this is a repo to start learning react with typescript and webpack
 
 ## How to follow along
