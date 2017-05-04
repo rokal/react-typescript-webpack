@@ -5,5 +5,9 @@
   "scripts": {
     "build": "webpack"
   },
-  "author": "Roland Kalmogo"
+  "author": "Roland Kalmogo",
+  "dependencies": {
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4"
+  }
 }
