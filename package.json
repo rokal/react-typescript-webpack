@@ -9,5 +9,12 @@
   "dependencies": {
     "react": "^15.5.4",
     "react-dom": "^15.5.4"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.0",
+    "ts-loader": "^2.0.3",
+    "typescript": "^2.3.2",
+    "typings": "^2.1.1",
+    "webpack": "^2.5.0"
   }
 }
