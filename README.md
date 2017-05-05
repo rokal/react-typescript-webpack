@@ -1,18 +1,20 @@
-# REACT DEMO WITH TYPESCRIPT
-this is a repo to start learning react with typescript and webpack
+#REACT DEMO WITH TYPESCRIPT
+This is a repo to start learning react with typescript and webpack.
 
-## How to run the application
-1. Clone the repository
-2. npm install
-3. npm run build 
-4. run 'live-server' and you will see your app
+The tutorial is organized into steps. ***You can switch the branches in ascending order to follow along***
+
+## How to follow along
+1. Clone the repository by running `git clone https://github.com/rokal/react-typescript-webpack.git `
+2. `npm install`
+3. `npm run build` 
+4. run `live-server` and you will see your app
 
 ## Step 2
 We'll here by setting up a scoreboard view and then we'll build the base components to refactor the app. We are going add some features to dynamize the application.
 
-To follow along, run *git checkout step2-1*
+To follow along, run `git checkout step2-1`
 
-To see the final result *git checkout step2-2*
+To see the final result `git checkout step2-2`
 
 
 ### What we've added
