@@ -3,9 +3,9 @@ this is a repo to start learning react with typescript and webpack
 
 ## How to follow along
 1. Clone the repository
-2. npm install
-3. npm run build 
-4. run 'live-server' and you will see your app
+2. `npm install`
+3. `npm run build `
+4. run `live-server` and you will see your app
 
 ## Step 3: Adding action on player score changes 
 Now that we have our project splitted correctly, we are going to add some actions on the buttons.
@@ -24,7 +24,7 @@ one that will take care of incrementing and decrementing the player score.
 
 An approach of solution is described below.
 
-1. The Application component which garther the whole elements.
+### Components update
 
 ***Application.tsx***
 ```typescript
@@ -36,20 +36,30 @@ import Header from './Header';
 
 interface AppProps {
     name: string;
-    players: PlayerProps[];
+    players: any[];
 }
 class Application extends React.Component<AppProps, {}>{
-    handleScoreChange(delta,index){
+    constructor(props:AppProps){
+        super(props);
+    }
+
+    handleScoreChange(delta:number,index:number){
         this.props.players[index].score +=delta;
         this.setState(this.state)
     }
+
     render() {
         return <div className="scoreboard">
             <Header name={this.props.name} />
             <div className="players">
                 {this.props.players
                     .map((p,index )=> 
-                            <Player score={p.score} name={p.name} key={index} onScoreChange={(delta) => this.handleScoreChange(delta,index)} />)
+                            <Player score={p.score} 
+                                    name={p.name} 
+                                    key={index} 
+                                    onScoreChange ={(delta)=> this.handleScoreChange(delta,index)} 
+                                    />
+                        )
                 }
             </div>
         </div>
@@ -57,52 +67,37 @@ class Application extends React.Component<AppProps, {}>{
 }
 export default Application;
 ```
-2. The Header component to show the title of the application of the application
-***Header.tsx***
-```typescript
-interface HeaderProps {
-    name: string
-}
-
-class Header extends React.Component<HeaderProps, {}>{
-    render() {
-        return <div className="header">
-                    <h1>{this.props.name}</h1>
-                </div>
-    }
-}
-
-export default Header;
-```
-3. The Player component to show the informations about a given player. In those informations, we a last component described as:
 
 ***Player.tsx***
 
 ```typescript
 
+import * as React from 'react'
 import Counter from './Counter';
 
 export interface PlayerProps{
     score:number;
     name:string;
+    onScoreChange(delta:number):void;
 }
 
 class Player extends React.Component<PlayerProps,{}>{
+    onScoreChange(delta:number){}
     render() {
-        return <div className="player">
+        return (
+            <div className="player">
                     <div className="player-name">
                         {this.props.name}
                     </div>
                     <div className="player-score">
-                        <Counter score = {this.props.score} /> 
+                        <Counter score = {this.props.score} onChange={(delta)=> this.onScoreChange(delta)} /> 
                     </div>
                 </div>
+        );
     }
 }
 export default Player;
 ```
-
-4. The Counter component which allow us to play (increment and decrement) with player score. It is embedded in the player component.
 
 ***Counter.tsx***
 ```typescript
@@ -110,14 +105,15 @@ import * as React from 'react'
 
 interface CounterProps {
     score: number
+    onChange(delta:number):void;
 }
 
 class Counter extends React.Component<CounterProps,{}>{
     render() {
         return <div className="counter">
-                    <button className="counter-action decrement" > - </button>
+                    <button className="counter-action decrement" onClick={()=> this.props.onChange(-1)}> - </button>
                     <div className="counter-score">{this.props.score} </div>
-                    <button className="counter-action increment"> + </button>
+                    <button className="counter-action increment" onClick ={()=>this.props.onChange(1)}> + </button>
                 </div>
     }
 }
@@ -125,31 +121,6 @@ class Counter extends React.Component<CounterProps,{}>{
 export default Counter;
 ```
 
-***index.html***
-
-```html
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="src/styles/app.css">
-    <title>Our awesome app</title>
-</head>
-
-<body>
-    <div id="container">
-    </div>
-
-    <script src="build/bundle.js"></script>
-</body>
-
-</html>
-```
-
 AND YOU RUN 
-1. npm run build
-2. live-server
+1. `npm run build`
+2. `live-server`
