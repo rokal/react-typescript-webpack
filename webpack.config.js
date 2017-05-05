@@ -4,7 +4,7 @@ var config = {
   /*
    * The application entry file(s)
    */
-  entry: ["./src/App.tsx"],
+  entry: ["./src/index.tsx"],
 
   /*
    * Specify the output bundled file
