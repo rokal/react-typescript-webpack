@@ -22053,13 +22053,21 @@ var Player_1 = __webpack_require__(185);
 var Header_1 = __webpack_require__(184);
 var Application = (function (_super) {
     __extends(Application, _super);
-    function Application() {
-        return _super !== null && _super.apply(this, arguments) || this;
+    function Application(props) {
+        return _super.call(this, props) || this;
     }
+    Application.prototype.handleScoreChange = function (delta, index) {
+        this.props.players[index].score += delta;
+        this.setState(this.state);
+    };
     Application.prototype.render = function () {
+        var _this = this;
         return React.createElement("div", { className: "scoreboard" },
             React.createElement(Header_1.default, { name: this.props.name }),
-            React.createElement("div", { className: "players" }, this.props.players.map(function (p, index) { return React.createElement(Player_1.default, { score: p.score, name: p.name, key: index }); })));
+            React.createElement("div", { className: "players" }, this.props.players
+                .map(function (p, index) {
+                return React.createElement(Player_1.default, { score: p.score, name: p.name, key: index, onScoreChange: function (delta) { return _this.handleScoreChange(delta, index); } });
+            })));
     };
     ;
     return Application;
@@ -22091,12 +22099,13 @@ var Counter = (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     Counter.prototype.render = function () {
+        var _this = this;
         return React.createElement("div", { className: "counter" },
-            React.createElement("button", { className: "counter-action decrement" }, " - "),
+            React.createElement("button", { className: "counter-action decrement", onClick: function () { return _this.props.onChange(-1); } }, " - "),
             React.createElement("div", { className: "counter-score" },
                 this.props.score,
                 " "),
-            React.createElement("button", { className: "counter-action increment" }, " + "));
+            React.createElement("button", { className: "counter-action increment", onClick: function () { return _this.props.onChange(1); } }, " + "));
     };
     return Counter;
 }(React.Component));
@@ -22159,11 +22168,13 @@ var Player = (function (_super) {
     function Player() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
+    Player.prototype.onScoreChange = function () { };
     Player.prototype.render = function () {
+        var _this = this;
         return React.createElement("div", { className: "player" },
             React.createElement("div", { className: "player-name" }, this.props.name),
             React.createElement("div", { className: "player-score" },
-                React.createElement(Counter_1.default, { score: this.props.score })));
+                React.createElement(Counter_1.default, { score: this.props.score, onChange: function (delta) { return _this.props.onScoreChange(delta); } })));
     };
     return Player;
 }(React.Component));

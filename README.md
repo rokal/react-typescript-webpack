@@ -7,8 +7,22 @@ this is a repo to start learning react with typescript and webpack
 3. npm run build 
 4. run 'live-server' and you will see your app
 
-## Step 2: Our solution 
-We separated our base template into four components:
+## Step 3: Adding action on player score changes 
+Now that we have our project splitted correctly, we are going to add some actions on the buttons.
+
+### **Some theory**
+The fact of have our app in the form of a set of reusable component is great for maintainability.  There are some best practices that come along with 
+components. In every component, all the properties that can change should be in the state. But here, it is very important to define which of component is 
+responsible of changing that state. If the attribute in the targetted component cannot be altered in that component, when some change occurs, an event is emitted to 
+the upper (in the hierarchy) component to handle the changes.
+
+To come back to our application, when the *increment* or *decrement* button is pressed in the *Counter* component of a player, an event is emitted in order to 
+let the upper component, i.e *Player* component, to handle the operation.
+The score is a part of the player attributes but a player has no state. That said, even the player is not responsible of holding the changes that occur on his score.
+An event will also be emitted to the upper, i.e *Application* component to handle the changes. As far as the *Application* component holds the players list, it'll the 
+one that will take care of incrementing and decrementing the player score.
+
+An approach of solution is described below.
 
 1. The Application component which garther the whole elements.
 
@@ -25,11 +39,18 @@ interface AppProps {
     players: PlayerProps[];
 }
 class Application extends React.Component<AppProps, {}>{
+    handleScoreChange(delta,index){
+        this.props.players[index].score +=delta;
+        this.setState(this.state)
+    }
     render() {
         return <div className="scoreboard">
             <Header name={this.props.name} />
             <div className="players">
-                {this.props.players.map((p,index )=> <Player score={p.score} name={p.name} key={index} />)}
+                {this.props.players
+                    .map((p,index )=> 
+                            <Player score={p.score} name={p.name} key={index} onScoreChange={(delta) => this.handleScoreChange(delta,index)} />)
+                }
             </div>
         </div>
     };
