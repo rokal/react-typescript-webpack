@@ -1,11 +1,13 @@
-# REACT DEMO WITH TYPESCRIPT
-this is a repo to start learning react with typescript and webpack
+#REACT DEMO WITH TYPESCRIPT
+This is a repo to start learning react with typescript and webpack.
 
-## How to follow along
-1. Clone the repository
-2. npm install
-3. npm run build 
-4. run 'live-server' and you will see your app
+The tutorial is organized into steps. ***You can switch the branches in ascending order to follow along***
+
+## How to run your app
+1. Clone the repository by running `git clone https://github.com/rokal/react-typescript-webpack.git `
+2. `npm install`
+3. `npm run build` 
+4. run `live-server` and you will see your app
 
 ## Step 1: Configuration of scoreboard
 Now that we have our helloworld app working properly, we are going to jump on a real world project: Score board application 
@@ -32,7 +34,7 @@ Now that we have our helloworld app working properly, we are going to jump on a 
 ```
 
 AND YOU RUN 
-1. npm run build
-2. live-server
+1. `npm run build`
+2. `live-server`
 
 ## BIG THANKS TO [Willson Mock](http://willsonmock.com)
