@@ -22,6 +22,7 @@ In this step, we came with a base template (Thanks to [Jim Hoskins](https://team
 We'll be using the base template as him and with our typescript skills, we'll make another approach to design the scoreboard application.
 
 ![alt text](./img-readme/beginning.PNG "Base template")
+
 This image is our base template.
 
 In the next step, we are going to split this template into reusable components.
