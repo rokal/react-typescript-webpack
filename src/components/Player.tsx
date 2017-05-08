@@ -4,11 +4,10 @@ import Counter from './Counter';
 export interface PlayerProps {
     score: number;
     name: string;
-    onScoreChange(delta: number): void;
+    onScoreChange?:(delta:number)=>void;
 }
 
 class Player extends React.Component<PlayerProps, {}>{
-    onScoreChange(delta: number) { }
     render() {
         return (
             <div className="player">
@@ -16,7 +15,9 @@ class Player extends React.Component<PlayerProps, {}>{
                     {this.props.name}
                 </div>
                 <div className="player-score">
-                    <Counter score={this.props.score} onChange={(delta) => this.onScoreChange(delta)} />
+                    <Counter 
+                        score={this.props.score} 
+                        onChange={(delta)=>this.props.onScoreChange(delta)} />
                 </div>
             </div>
         );

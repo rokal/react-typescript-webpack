@@ -6,30 +6,39 @@ import Header from './Header';
 
 interface AppProps {
     name: string;
-    players: any[];
+    players: PlayerProps[];
 }
-class Application extends React.Component<AppProps, {}>{
-    constructor(props:AppProps){
+interface AppState{
+     players: PlayerProps[];
+}
+class Application extends React.Component<AppProps, AppState>{
+    constructor(props: AppProps) {
         super(props);
+        this.state={
+            players:this.props.players
+        }
     }
 
-    handleScoreChange(delta:number,index:number){
-        this.props.players[index].score +=delta;
+    handleScoreChange(delta: number, index: number) {
+        this.state.players[index].score += delta;
         this.setState(this.state)
     }
 
     render() {
         return <div className="scoreboard">
-            <Header name={this.props.name} />
+            <Header name={this.props.name}
+                playersNumber={this.props.players.length}
+                totalScore={this.props.players.map(p => p.score).reduce((prev, next) => prev + next)}
+            />
             <div className="players">
                 {this.props.players
-                    .map((p,index )=> 
-                            <Player score={p.score} 
-                                    name={p.name} 
-                                    key={index} 
-                                    onScoreChange ={(delta)=> this.handleScoreChange(delta,index)} 
-                                    />
-                        )
+                    .map((p, index) =>
+                        <Player score={p.score}
+                            name={p.name}
+                            key={index}
+                            onScoreChange={(delta) => this.handleScoreChange(delta, index)}
+                        />
+                    )
                 }
             </div>
         </div>

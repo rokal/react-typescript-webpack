@@ -9527,42 +9527,34 @@ var PLAYERS = [
     {
         name: "Roland",
         score: 47,
-        id: 1,
     },
     {
         name: "David",
         score: 35,
-        id: 2,
     },
     {
         name: "Cohan",
         score: 42,
-        id: 3,
     },
     {
         name: "Adrien",
         score: 47,
-        id: 1,
     },
     {
         name: "Maxime",
         score: 35,
-        id: 2,
     },
     {
         name: "Jordan",
         score: 42,
-        id: 3,
     },
     {
         name: "François",
         score: 35,
-        id: 2,
     },
     {
         name: "Louis-Philippe",
         score: 42,
-        id: 3,
     },
 ];
 ReactDOM.render(React.createElement(Application_1.default, { players: PLAYERS, name: "Score Board" }), document.getElementById("container"));
@@ -22054,16 +22046,18 @@ var Header_1 = __webpack_require__(184);
 var Application = (function (_super) {
     __extends(Application, _super);
     function Application(props) {
-        return _super.call(this, props) || this;
+        var _this = _super.call(this, props) || this;
+        _this.state = { players: _this.props.players };
+        return _this;
     }
     Application.prototype.handleScoreChange = function (delta, index) {
-        this.props.players[index].score += delta;
+        this.state.players[index].score += delta;
         this.setState(this.state);
     };
     Application.prototype.render = function () {
         var _this = this;
         return React.createElement("div", { className: "scoreboard" },
-            React.createElement(Header_1.default, { name: this.props.name }),
+            React.createElement(Header_1.default, { name: this.props.name, playersNumber: this.props.players.length, totalScore: this.props.players.map(function (p) { return p.score; }).reduce(function (prev, next) { return prev + next; }) }),
             React.createElement("div", { className: "players" }, this.props.players
                 .map(function (p, index) {
                 return React.createElement(Player_1.default, { score: p.score, name: p.name, key: index, onScoreChange: function (delta) { return _this.handleScoreChange(delta, index); } });
@@ -22136,8 +22130,16 @@ var Header = (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     Header.prototype.render = function () {
-        return React.createElement("div", { className: "header" },
-            React.createElement("h1", null, this.props.name));
+        return (React.createElement("div", { className: "header" },
+            React.createElement("table", { className: "stats" },
+                React.createElement("tbody", null,
+                    React.createElement("tr", null,
+                        React.createElement("td", null, "Teams:"),
+                        React.createElement("td", null, this.props.playersNumber)),
+                    React.createElement("tr", null,
+                        React.createElement("td", null, "Total score:"),
+                        React.createElement("td", null, this.props.totalScore)))),
+            React.createElement("h1", null, this.props.name)));
     };
     return Header;
 }(React.Component));
@@ -22168,13 +22170,12 @@ var Player = (function (_super) {
     function Player() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    Player.prototype.onScoreChange = function () { };
     Player.prototype.render = function () {
         var _this = this;
-        return React.createElement("div", { className: "player" },
+        return (React.createElement("div", { className: "player" },
             React.createElement("div", { className: "player-name" }, this.props.name),
             React.createElement("div", { className: "player-score" },
-                React.createElement(Counter_1.default, { score: this.props.score, onChange: function (delta) { return _this.props.onScoreChange(delta); } })));
+                React.createElement(Counter_1.default, { score: this.props.score, onChange: function (delta) { return _this.props.onScoreChange(delta); } }))));
     };
     return Player;
 }(React.Component));

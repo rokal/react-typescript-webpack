@@ -1,47 +1,40 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import Application from './components/Application';
+import {PlayerProps} from './components/Player';
 
-let PLAYERS=[
+let PLAYERS:PlayerProps[]=[
   {
     name: "Roland",
     score:47,
-    id: 1,
   },
   {
     name: "David",
     score: 35,
-    id: 2,
   },
   {
     name: "Cohan",
     score: 42,
-    id: 3,
   },
   {
     name: "Adrien",
     score:47,
-    id: 1,
   },
   {
     name: "Maxime",
     score: 35,
-    id: 2,
   },
   {
     name: "Jordan",
     score: 42,
-    id: 3,
   },
   {
     name: "François",
     score: 35,
-    id: 2,
   },
   {
     name: "Louis-Philippe",
     score: 42,
-    id: 3,
   },
 ];
 
