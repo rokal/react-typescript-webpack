@@ -21,5 +21,8 @@ To see the final result `git checkout step2-2`
 In this step, we came with a base template (Thanks to [Jim Hoskins](https://teamtreehouse.com/jim)) to works with. Jim created a react tutorial on [teamtreehouse](https://teamtreehouse.com/library/react-basics) but uses ES5. 
 We'll be using the base template as him and with our typescript skills, we'll make another approach to design the scoreboard application.
 
-IMAGE DESCRIPTION OF THE APP HERE
+![alt text](./img-readme/beginning.PNG "Base template")
+This image is our base template.
+
+In the next step, we are going to split this template into reusable components.
 
