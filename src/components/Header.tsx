@@ -1,7 +1,8 @@
-import * as React from 'react'
+import * as React from 'react';
+import Stopwatch from './Stopwatch';
 
 interface HeaderProps {
-    name: string
+    name: string;
     playersNumber: number;
     totalScore:number
 }
@@ -23,6 +24,8 @@ class Header extends React.Component<HeaderProps, {}>{
                     </tbody>
                 </table>
                 <h1>{this.props.name}</h1>
+
+                <Stopwatch />
             </div>
         );
     }
