@@ -25,7 +25,7 @@ class Header extends React.Component<HeaderProps, {}>{
                 </table>
                 <h1>{this.props.name}</h1>
 
-                <Stopwatch />
+                <Stopwatch running={true}/>
             </div>
         );
     }

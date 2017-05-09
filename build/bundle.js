@@ -22143,7 +22143,7 @@ var Header = (function (_super) {
                         React.createElement("td", null, "Total score:"),
                         React.createElement("td", null, this.props.totalScore)))),
             React.createElement("h1", null, this.props.name),
-            React.createElement(Stopwatch_1.default, null)));
+            React.createElement(Stopwatch_1.default, { running: true })));
     };
     return Header;
 }(React.Component));
@@ -22206,21 +22206,56 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(20);
 var Stopwatch = (function (_super) {
     __extends(Stopwatch, _super);
-    function Stopwatch() {
-        return _super !== null && _super.apply(this, arguments) || this;
+    function Stopwatch(props) {
+        var _this = _super.call(this, props) || this;
+        _this.tick = function () {
+            if (_this.state.running) {
+                var now = Date.now();
+                _this.setState({
+                    previousTime: now,
+                    elapsedTime: _this.state.elapsedTime + (now - _this.state.previousTime),
+                    running: true
+                });
+            }
+        };
+        _this.componentWillUnmount = function () {
+            clearInterval(_this.interval);
+        };
+        _this.componentDidMount = function () {
+            _this.interval = setInterval(_this.tick, 100);
+        };
+        _this.onStop = function () {
+            _this.setState({
+                running: false,
+            });
+        };
+        _this.onStart = function () {
+            _this.setState({
+                previousTime: Date.now(),
+                running: true
+            });
+        };
+        _this.onReset = function () {
+            _this.setState({
+                previousTime: 0,
+                elapsedTime: 0,
+                running: false
+            });
+        };
+        _this.state = {
+            elapsedTime: 0,
+            previousTime: 0,
+            running: false
+        };
+        return _this;
     }
-    Stopwatch.prototype.componentWillMount = function () {
-        console.log("component will mount");
-    };
-    Stopwatch.prototype.componentDidMount = function () {
-        console.log("stopwatch has been mounted");
-    };
     Stopwatch.prototype.render = function () {
+        var timeInSecondes = Math.floor(this.state.elapsedTime / 1000);
         return (React.createElement("div", { className: "stopwatch" },
             React.createElement("h2", null, "Stop watch"),
-            React.createElement("div", { className: "stopwatch-time" }, "0"),
-            React.createElement("button", null, "Start"),
-            React.createElement("button", null, "Reset")));
+            React.createElement("div", { className: "stopwatch-time" }, timeInSecondes),
+            this.state.running ? React.createElement("button", { onClick: this.onStop }, "Stop") : React.createElement("button", { onClick: this.onStart }, "Start"),
+            React.createElement("button", { onClick: this.onReset }, "Reset")));
     };
     return Stopwatch;
 }(React.Component));
