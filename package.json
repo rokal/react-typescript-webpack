@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "learning react with typescript",
   "scripts": {
-    "build": "webpack"
+    "build": "webpack",
+    "start": "webpack-dev-server --progress --inline"
   },
   "author": "Roland Kalmogo",
   "dependencies": {
@@ -15,6 +16,7 @@
     "ts-loader": "^2.0.3",
     "typescript": "^2.3.2",
     "typings": "^2.1.1",
-    "webpack": "^2.5.0"
+    "webpack": "^2.5.0",
+    "webpack-dev-server": "^2.4.5"
   }
 }
