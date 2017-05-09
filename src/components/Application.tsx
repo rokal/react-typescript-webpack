@@ -2,6 +2,7 @@ import * as React from 'react';
 import Player from './Player';
 import { PlayerProps } from './Player';
 import Header from './Header';
+import AddPlayerForm from './AddPlayerForm';
 
 
 interface AppProps {
@@ -23,6 +24,13 @@ class Application extends React.Component<AppProps, AppState>{
         this.state.players[index].score += delta;
         this.setState(this.state)
     }
+    addPlayer = (playerName:string)=>{
+        this.state.players.push({
+            score:0,
+            name:playerName
+        });
+        this.setState(this.state);
+    }
 
     render() {
         return <div className="scoreboard">
@@ -41,6 +49,7 @@ class Application extends React.Component<AppProps, AppState>{
                     )
                 }
             </div>
+            <AddPlayerForm onPlayerAdd = {this.addPlayer}/>
         </div>
     };
 }
